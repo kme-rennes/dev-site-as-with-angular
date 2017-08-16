@@ -1,3 +1,16 @@
 <p>
   liste-article works!
 </p>
+<h2 highlight="gold">My articles</h2>
+
+<ul class="articles">
+  <li *ngFor="let article of (articles | async)"
+      [class.selected]="article === selectedArticle"
+      (click)="onSelect(article)">
+
+
+    <span class="badge">{{article.id}}</span> {{article.name}}
+  </li>
+</ul>
+<ngb-pagination (pageChange)="onPager($event)" [pageSize]="itemPerPage" [collectionSize]="totalItems" [(page)]="page" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+

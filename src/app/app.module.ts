@@ -7,8 +7,11 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './about.component';
 import { WelcomeComponent } from './welcome.component';
 import { BannerComponent } from './banner.component';
+import { HttpModule } from '@angular/http';
 
 import { CoreModule} from './core/core.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { CoreModule} from './core/core.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

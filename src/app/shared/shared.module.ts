@@ -10,7 +10,7 @@ import { TitleCasePipe }      from './title-case.pipe';
 @NgModule({
   imports:      [ CommonModule, FormsModule
   ],
-  exports:      [ CommonModule, FormsModule, AppRoutingModule,
+  exports:      [ CommonModule, FormsModule,
       HighlightDirective, TitleCasePipe ],
   declarations: [ HighlightDirective, TitleCasePipe ]
 })
