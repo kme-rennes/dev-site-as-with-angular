@@ -10,7 +10,6 @@ export class ArticleService {
   constructor(private http: Http) { }
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  //private articlesUrl = 'api/bikes';
   private articlesUrl = './assets/articles.json';
 
   getArticles(): Promise<Article[]> {

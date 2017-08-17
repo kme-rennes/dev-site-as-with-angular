@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ListeArticleComponent implements OnInit {
 
-  articles: Article[];
+  articles: Article[] = [];
   selectedArticle: Article;
   newArticle: Article;
   page = 1;
@@ -24,7 +24,6 @@ export class ListeArticleComponent implements OnInit {
 
   ngOnInit() {
     this.articleService.getArticles().then(articles => this.articles = articles);
-    this.newArticle = new Article();
   }
   onSelect(article: Article) {
     this.selectedArticle = article;
