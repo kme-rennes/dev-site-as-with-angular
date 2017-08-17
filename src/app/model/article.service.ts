@@ -18,7 +18,7 @@ export class ArticleService {
 
   getArticles(): Observable<Article[]> {
     return this.http.get(this.articlesUrl)
-      .map(response => response.json().data as Article)
+      .map(response => response.json())
       .catch(this.handleError);
   }
 

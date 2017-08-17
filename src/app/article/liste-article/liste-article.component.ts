@@ -15,10 +15,11 @@ import 'rxjs/add/operator/catch';
 export class ListeArticleComponent implements OnInit {
 
   articles: Observable<Article[]>;
+  articlesPage: Observable<Article[]>;
   selectedArticle: Article;
   newArticle: Article;
   page = 1;
-  itemPerPage = 5;
+  itemPerPage = 2;
   totalItems = 120;
 
   constructor(private router: Router, private articleService: ArticleService) {
@@ -28,6 +29,10 @@ export class ListeArticleComponent implements OnInit {
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
+    this.articlesPage = this.articles.skip((this.page - 1) * this.itemPerPage ).take(this.itemPerPage);
+
+    //this.articlesPage = this.articles.slice(  (this.page - 1) * this.itemPerPage , (this.page) * this.itemPerPage );
+
   }
   onSelect(article: Article) {
     this.selectedArticle = article;
@@ -36,8 +41,9 @@ export class ListeArticleComponent implements OnInit {
   onPager(event: number): void {
     console.log('Page event is' , event);
     this.page = event;
+    this.articlesPage = this.articles.skip((this.page - 1) * this.itemPerPage ).take(this.itemPerPage);
 
-    console.log('tab' , this.articles);
+    console.log('tab' , this.articlesPage.count());
     //this.articleService.getArticles().then(articles => this.articles = articles);
 
   }
