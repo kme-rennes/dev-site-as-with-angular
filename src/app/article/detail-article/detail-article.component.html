@@ -1,3 +1,17 @@
 <p>
   detail-article works!
 </p>
+<div *ngIf="article">
+  <h2><span>{{article.name | titlecase}}</span> Details</h2>
+  <div>
+    <label>id: </label>{{article.id}}</div>
+  <div>
+    <label for="name">name: </label>
+    <input id="name" [(ngModel)]="article.name" placeholder="name" />
+    <input id="contenu" [(ngModel)]="article.contenu" placeholder="contenu" />
+    <img id="urlImage" src={{article.urlImage}}/>
+  </div>
+  <button (click)="save()">Save</button>
+</div>
+
+<button (click)="cancel()">Cancel</button>

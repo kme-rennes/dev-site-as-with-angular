@@ -24,7 +24,12 @@ export class ArticleService {
 
 
   getArticle(id: number): Observable<Article> {
+    console.log('service');
     const url = `${this.articlesUrl}/${id}`;
+    console.log('before return');
+    const art = this.http.get(url)
+      .map(response => response.json().data as Article)
+    console.log(art);
     return this.http.get(url)
       .map(response => response.json().data as Article)
       .catch(this.handleError);

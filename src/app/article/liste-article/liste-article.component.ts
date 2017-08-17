@@ -41,7 +41,7 @@ export class ListeArticleComponent implements OnInit {
     console.log('per Page is' , this.itemPerPage);
     this.articles = Observable.combineLatest(
       this.articleService.getArticles(),
-      this.page.debounceTime(100), this.page.startWith(this.initialPage),
+      this.page.startWith(this.initialPage).debounceTime(100),
       (articles, page) => {
         this.totalItems = Object.keys(articles).length;
         return articles.slice((page - 1) * this.itemPerPage, page * this.itemPerPage);
