@@ -12,5 +12,5 @@
     <span class="badge">{{article.id}}</span> {{article.name}}
   </li>
 </ul>
-<ngb-pagination (pageChange)="onPager($event)" [pageSize]="itemPerPage" [collectionSize]="totalItems" [(page)]="page" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+<ngb-pagination (pageChange)="page.next($event)" [pageSize]="itemPerPage" [collectionSize]="totalItems" [page]="initialPage" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
 
