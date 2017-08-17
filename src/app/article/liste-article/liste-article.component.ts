@@ -70,19 +70,19 @@ export class ListeArticleComponent implements OnInit {
   }
   createArticle(article: Article): void {
 
-    //this.articleService.createArticle(article)
-      //.then(articles => {
-       // this.articles.push(articles);
-       // this.selectedArticle = null;
-      //});
+    this.articleService.createArticle(article)
+      .map(articles => {
+        this.articles.push(articles);
+        this.selectedArticle = null;
+      });
   }
 
   deleteArticle(article: Article): void {
-    //this.articleService
-     // .deleteArticle(article)
-     // .then(() => {
-      //  this.articles = this.articles.filter(b => b !== article);
-      //  if (this.selectedArticle === article) { this.selectedArticle = null; }
-      //});
+    this.articleService
+      .deleteArticle(article)
+      .map(() => {
+        this.articles = this.articles.filter(b => b !== article);
+        if (this.selectedArticle === article) { this.selectedArticle = null; }
+      });
   }
 }

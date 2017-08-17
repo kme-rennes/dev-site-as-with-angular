@@ -38,12 +38,9 @@ export class DetailArticleComponent implements OnInit {
     const realId = Number(id);
     console.log('realid');
     this.articleService.getArticle(realId).map(article => {
-      console.log('methode');
       if (article) {
-        console.log('if');
         this.article = article;
       } else {
-        console.log('else');
         this.gotoList(); // id not found; navigate to list
       }
     });
