@@ -3,6 +3,10 @@ import { Article} from '../../model/article';
 import {  ArticleService} from '../../model/article.service';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 @Component({
   selector: 'app-liste-article',
   templateUrl: './liste-article.component.html',
@@ -10,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ListeArticleComponent implements OnInit {
 
-  articles: Article[] = [];
+  articles: Observable<Article[]>;
   selectedArticle: Article;
   newArticle: Article;
   page = 1;
@@ -23,7 +27,7 @@ export class ListeArticleComponent implements OnInit {
 
 
   ngOnInit() {
-    this.articleService.getArticles().then(articles => this.articles = articles);
+    this.articles = this.articleService.getArticles();
   }
   onSelect(article: Article) {
     this.selectedArticle = article;
@@ -33,28 +37,29 @@ export class ListeArticleComponent implements OnInit {
     console.log('Page event is' , event);
     this.page = event;
 
+    console.log('tab' , this.articles);
     //this.articleService.getArticles().then(articles => this.articles = articles);
 
   }
 
   getArticles(): void {
-    this.articleService.getArticles().then(articles => this.articles = articles);
+    this.articles = this.articleService.getArticles();
   }
   createArticle(article: Article): void {
 
-    this.articleService.createArticle(article)
-      .then(articles => {
-        this.articles.push(articles);
-        this.selectedArticle = null;
-      });
+    //this.articleService.createArticle(article)
+      //.then(articles => {
+       // this.articles.push(articles);
+       // this.selectedArticle = null;
+      //});
   }
 
   deleteArticle(article: Article): void {
-    this.articleService
-      .deleteArticle(article)
-      .then(() => {
-        this.articles = this.articles.filter(b => b !== article);
-        if (this.selectedArticle === article) { this.selectedArticle = null; }
-      });
+    //this.articleService
+     // .deleteArticle(article)
+     // .then(() => {
+      //  this.articles = this.articles.filter(b => b !== article);
+      //  if (this.selectedArticle === article) { this.selectedArticle = null; }
+      //});
   }
 }

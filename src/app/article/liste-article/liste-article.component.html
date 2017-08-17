@@ -4,7 +4,7 @@
 <h2 highlight="gold">My articles</h2>
 
 <ul class="articles">
-  <li *ngFor="let article of (articles | async)"
+  <li *ngFor="let article of articles | async"
       [class.selected]="article === selectedArticle"
       (click)="onSelect(article)">
 

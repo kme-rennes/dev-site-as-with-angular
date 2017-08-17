@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Article} from './article';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class ArticleService {
@@ -12,45 +16,40 @@ export class ArticleService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private articlesUrl = './assets/articles.json';
 
-  getArticles(): Promise<Article[]> {
+  getArticles(): Observable<Article[]> {
     return this.http.get(this.articlesUrl)
-      .toPromise()
-      .then(response => response.json().data as Article[])
+      .map(response => response.json().data as Article)
       .catch(this.handleError);
   }
 
 
-  getArticle(id: number): Promise<Article> {
+  getArticle(id: number): Observable<Article> {
     const url = `${this.articlesUrl}/${id}`;
     return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data as Article)
+      .map(response => response.json().data as Article)
       .catch(this.handleError);
   }
 
 
-  createArticle(article: Article): Promise<Article> {
+  createArticle(article: Article): Observable<Article> {
     return this.http
       .post(this.articlesUrl, JSON.stringify(article), { headers: this.headers })
-      .toPromise()
-      .then(res => res.json().data as Article)
+      .map(res => res.json().data as Article)
       .catch(this.handleError);
   }
 
-  updateArticle(article: Article): Promise<Article> {
+  updateArticle(article: Article): Observable<Article> {
     const url = `${this.articlesUrl}/${article.id}`;
     return this.http
       .put(url, JSON.stringify(article), { headers: this.headers })
-      .toPromise()
-      .then(() => article)
+      .map(() => article)
       .catch(this.handleError);
   }
 
-  deleteArticle(article: Article): Promise<void> {
+  deleteArticle(article: Article): Observable<void> {
     const url = `${this.articlesUrl}/${article.id}`;
     return this.http.delete(url, { headers: this.headers })
-      .toPromise()
-      .then(() => null)
+      .map(() => null)
       .catch(this.handleError);
   }
 
