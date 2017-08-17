@@ -28,23 +28,19 @@ export class DetailArticleComponent implements OnInit {
   }
 
   private getArticle(id: string): void {
-    // when no id or id===0, create new hero
-    console.log('id get article');
     if (!id) {
       this.article = new Article();
       return;
     }
 
-    const realId = Number(id);
-    console.log('realid');
-    this.articleService.getArticle(realId).map(article => {
-      if (article) {
-        this.article = article;
-      } else {
-        this.gotoList(); // id not found; navigate to list
-      }
-    });
-    console.log('realid2');
+    this.articleService.getArticle(Number(id))
+      .subscribe(article => {
+        if (article) {
+          this.article = article;
+        } else {
+          this.gotoList(); // id not found; navigate to list
+        }
+      });
   }
 
 

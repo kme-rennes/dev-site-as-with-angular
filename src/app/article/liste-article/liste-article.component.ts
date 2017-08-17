@@ -38,7 +38,7 @@ export class ListeArticleComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log('per Page is' , this.itemPerPage);
+    this.articles = this.articleService.loadArticles();
     this.articles = Observable.combineLatest(
       this.articleService.getArticles(),
       this.page.startWith(this.initialPage).debounceTime(100),
@@ -47,10 +47,6 @@ export class ListeArticleComponent implements OnInit {
         return articles.slice((page - 1) * this.itemPerPage, page * this.itemPerPage);
       }
     );
-    //this.articlesPage = this.articles.skip((this.page - 1) * this.itemPerPage).take(this.itemPerPage);
-
-    //this.articlesPage = this.articles.slice(  (this.page - 1) * this.itemPerPage , (this.page) * this.itemPerPage );
-
   }
   onSelect(article: Article) {
     this.selectedArticle = article;
@@ -64,24 +60,16 @@ export class ListeArticleComponent implements OnInit {
     //this.articleService.getArticles().then(articles => this.articles = articles);
 
   }
-
-  getArticles(): void {
-    this.articles = this.articleService.getArticles();
-  }
   createArticle(article: Article): void {
-
     this.articleService.createArticle(article)
-      .map(articles => {
-        this.articles.push(articles);
+      .subscribe(articles => {
         this.selectedArticle = null;
       });
   }
 
   deleteArticle(article: Article): void {
-    this.articleService
-      .deleteArticle(article)
-      .map(() => {
-        this.articles = this.articles.filter(b => b !== article);
+    this.articleService.deleteArticle(article)
+      .subscribe(() => {
         if (this.selectedArticle === article) { this.selectedArticle = null; }
       });
   }
