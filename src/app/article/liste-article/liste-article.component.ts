@@ -38,7 +38,7 @@ export class ListeArticleComponent implements OnInit {
 
   ngOnInit() {
 
-    this.articles = this.articleService.loadArticles();
+    this.articleService.loadArticles().subscribe();
     this.articles = Observable.combineLatest(
       this.articleService.getArticles(),
       this.page.startWith(this.initialPage).debounceTime(100),

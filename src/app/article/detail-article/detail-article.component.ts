@@ -20,11 +20,9 @@ export class DetailArticleComponent implements OnInit {
   @Input() article: Article;
 
   ngOnInit() {
-  console.log('test');
     // get hero when `id` param changes
     const id =  this.route.snapshot.params['id'];
     this.getArticle(id);
-    console.log('id init');
   }
 
   private getArticle(id: string): void {
@@ -35,6 +33,7 @@ export class DetailArticleComponent implements OnInit {
 
     this.articleService.getArticle(Number(id))
       .subscribe(article => {
+        console.log(article);
         if (article) {
           this.article = article;
         } else {

@@ -11,7 +11,7 @@
     <input id="contenu" [(ngModel)]="article.contenu" placeholder="contenu" />
     <img id="urlImage" src={{article.urlImage}}/>
   </div>
+  <button (click)="cancel()">Cancel</button>
   <button (click)="save()">Save</button>
 </div>
 
-<button (click)="cancel()">Cancel</button>
