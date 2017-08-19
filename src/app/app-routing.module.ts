@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about.component';
 
 const routes: Routes = [
+
   { path: 'about', component: AboutComponent },
   { path: 'articles', loadChildren: 'app/article/article.module#ArticleModule'}
 ];
