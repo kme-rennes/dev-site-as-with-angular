@@ -33,7 +33,8 @@ export class ListeArticleComponent implements OnInit {
     console.log('Page event is' , event);
     this.page = event;
 
-    this.articleService.getArticles().then(articles => this.articles = articles);
+    //this.articleService.getArticles().then(articles => this.articles = articles);
+
   }
 
   getArticles(): void {
